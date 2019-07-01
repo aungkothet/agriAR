@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome to AgriAR</title>
+	<script src="./js/aframe.min.js"></script>
+    <script src="./js/aframe-ar.js"></script>
+	<script src="./js/video.js"></script>
+	<!-- <script src="./js/3dmodel.js"></script> -->
+	
+<body style='margin : 0px; overflow: hidden;'>
+	
+    <!-- <a-scene embedded arjs='sourceType: webcam;'> -->
+        <!-- <a-marker preset='hiro'>
+                awba-pattern.patt
+                <a-gltf-model src="./trainedfiles/aa.gltf" position="-1 -1.7 0"></a-gltf-model>
+        </a-marker>
+        <a-entity camera>
+        </a-entity> -->
+        <!-- deadtree pos
+            <a-entity gltf-model="#myModel" position="0.004 0.008 -0.029" scale="0.1 0.05 0.07" ></a-entity>
+         -->
+        <!-- <a-assets>
+            <a-asset-item id="myModel" src="./trainedfiles/ant.gltf"></a-asset-item>
+        </a-assets> -->
+        
+        
+        	<!-- <a-box rotation="0 45 0" color="#4CC3D9"></a-box>
+            <a-marker-camera preset='custom' type='pattern' url='./trainedfiles/pattern.patt'>
+                
+            </a-marker-camera>
+	</a-scene> -->
+   
+
+    <a-scene arjs='sourceType: webcam;'>
+		<a-assets>
+			<video id="penguin-sledding" loop="true" src="./trainedfiles/awba.mp4" preventDefault();
+			></video>
+        </a-assets>
+        <!-- <a-box rotation="0 45 0" color="#4CC3D9"></a-box> -->
+        <a-marker preset='custom' type='pattern' url='./trainedfiles/awba.patt' markerhandler>
+			<a-video position="0.023 1.204 -0.414"  rotation="-87.35 38.763 -44.03" scale="0.613 0.746 1.608" width="2" height="1" src="#penguin-sledding"></a-video>                
+			<!-- <a-video position="-0.1 0.1 0"  rotation="9.9 .91 -0.99" scale="1.9 1.9 1.55" width="1.5" height="1" src="#penguin-sledding"></a-video>                 -->
+        </a-marker>
+	</a-scene>
+
+</body>
+<style>
+#arjsDebugUIContainer{
+	display: none;
+}
+</style>
+</html>

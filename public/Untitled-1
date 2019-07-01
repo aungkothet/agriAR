@@ -1,0 +1,42 @@
+  <a-scene>
+	<a-assets>
+	  <video id="penguin-sledding" autoplay loop="true" src="./trainedfiles/samplevideo.mp4"></video>
+	</a-assets>
+  
+	<!-- Using the asset management system. -->
+	<a-video src="#penguin-sledding" width="16" height="9" position="0 0 -20"></a-video>
+  
+	<!-- Defining the URL inline. Not recommended but more comfortable for web developers.
+	<a-video src="airbending.mp4"></a-video> -->
+	<a-marker-camera preset='hiro'></a-marker-camera>
+  </a-scene>
+
+*/
+
+
+<!-- <a-scene> -->
+		<!-- <a-assets>
+				<img id="my-image" src="./trainedfiles/awba-logo-1.png">
+			  </a-assets>
+			
+			  Using the asset management system.
+			  <a-image src="#my-image"></a-image> -->
+		<!-- <a-assets>
+			<video id="vid" src="./trainedfiles/samplevideo.mp4"></video>
+		</a-assets> -->
+		<!-- Using the asset management system. -->
+		<!-- <a-video src="#vid"></a-video> -->
+		<!-- <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box> -->
+		<!-- <a-sky color="#6EBAA7"></a-sky> -->
+		<!-- <a-marker-camera preset='hiro'></a-marker-camera> -->
+		<!-- <a-marker-camera preset="pattern" type="pattern" patternUrl="./trainedfiles/pattern-marker.patt">
+
+	</a-marker-camera> -->
+	<!-- <a-marker-camera preset="pattern" type="pattern" patternUrl="./trainedfiles/pattern.patt"></a-marker-camera>  -->
+		<!-- <a-assets>
+		<img id="platform" src="https://i.imgur.com/mYmmbrp.jpg">
+	  </a-assets> -->
+
+		<!-- Basic triangle. -->
+		<!-- <a-triangle color="#CCC" vertex-c="1 -1 0"></a-triangle>
+	  <a-marker-camera preset='hiro'></a-marker-camera> -->

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome to AgriAR</title>
+	<script src="./js/aframe.min.js"></script>
+    <script src="./js/aframe-ar.js"></script>
+	<!-- <script src="./js/video.js"></script>
+	<script src="./js/3dmodel.js"></script> -->
+	
+<body style='margin : 0px; overflow: hidden;'>
+	
+    <a-scene embedded arjs='sourceType: webcam;'>
+        <!-- <a-marker preset='hiro'>
+                
+                <a-gltf-model src="./trainedfiles/aa.gltf" position="-1 -1.7 0"></a-gltf-model>
+        </a-marker>
+        <a-entity camera>
+        </a-entity> -->
+        <!-- deadtree pos
+            <a-entity gltf-model="#myModel" position="0.004 0.008 -0.029" scale="0.1 0.05 0.07" ></a-entity>
+         -->
+        <a-assets>
+            <a-asset-item id="myModel" src="./trainedfiles/ant.gltf"></a-asset-item>
+        </a-assets>
+        <a-marker preset="hiro">
+            <a-entity gltf-model="#myModel"  scale="100 100 100" ></a-entity>
+        </a-marker>
+	</a-scene>
+   
+
+</body>
+<style>
+#arjsDebugUIContainer{
+	display: none;
+}
+</style>
+</html>
