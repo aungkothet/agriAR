@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>CityAR- Smarter City with AR Tech</title>
+  <script src="//cdn.8thwall.com/web/aframe/8frame-0.9.0.min.js"></script>
+  <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+  <script
+    src="//apps.8thwall.com/xrweb?appKey=gtW1JwEKcZnXsZxD8e9U6EbsmKYpj6Ynqa7bbBRL4WfYms00XsQsYhv3SUxLPex7km0qF5"></script>
+  <script defer src="//cdn.8thwall.com/web/aframe/aframe-animation-component-5.1.2.min.js"></script>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
+
+    body {
+      background: #333;
+      color: #FFF;
+      font-family: "Open Sans";
+      font-weight: 300;
+    }
+
+    .typing {
+      position: relative;
+      line-height: 24px;
+      display: inline-block;
+      color: #FFF;
+      min-width: 1px;
+      min-height: 24px;
+    }
+
+    .typing:after {
+      content: "";
+      position: absolute;
+      top: 5%;
+      right: -2px;
+      width: 1px;
+      height: 90%;
+      border-right: 2px solid #FFF;
+      animation: blink .5s infinite ease;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1%;
+      }
+    }
+
+    div.typing {
+      z-index: 10;
+      width: 100%;
+      position: absolute;
+      top: 40%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.425);
+      text-align: start;
+      color: #FFFFFF;
+      vertical-align: middle;
+      user-select: none;
+      display: none;
+    }
+
+    div.clear {
+      z-index: 10;
+      position: absolute;
+      bottom: 50px;
+      right: 20px;
+      background-color: rgba(233, 10, 10, 0.856);
+      text-align: center;
+      color: #FFFFFF;
+      vertical-align: middle;
+      user-select: none;
+    }
+  </style>
+  <script>
+  
+  AFRAME.registerComponent("my-xrextras-play-video", {
+      schema: {
+        video: {
+          type: "string"
+        },
+        thumb: {
+          type: "string"
+        },
+        canstop: {
+          type: "bool"
+        },
+        name: {
+          type: "string"
+        }
+      },
+      init: function () {
+        const e = document.querySelector(this.data.video),
+          n = this.data.thumb && document.querySelector(this.data.thumb),
+          t = this.el;
+          clear_button = document.getElementById('clear');
+
+          const eImg = this.el.object3D,
+                nImg = this.data.name;
+            eImg.visible = !1;
+
+        t.setAttribute("material", "src", n || e), t.setAttribute("class", "cantap");
+        let r = !1;
+        t.addEventListener("click", () => {
+          r ? this.data.canstop && (t.setAttribute("material", "src", n || e), e.pause(), r = !1) : (t.setAttribute("material", "src", e), e.play(), r = !0)
+        })
+        const tImg = ({
+                detail: tImg
+            }) => {
+              // alert(tImg.position.x+" , "+tImg.position.y+" , "+tImg.position.z)  -1.319,3.01,3.445
+                nImg == tImg.name && (eImg.position.copy(tImg.position), eImg.quaternion.copy(tImg.rotation), eImg.scale.set(tImg.scale, tImg.scale, tImg.scale), eImg.visible = !0)
+            };
+            this.el.sceneEl.addEventListener("xrimagefound", tImg), this.el.sceneEl.addEventListener("xrimageupdated", tImg)
+
+        clear_button.addEventListener("click",({
+                           
+                        }) => {
+                          t.setAttribute("material", "src", n || e)
+                          e.pause()
+                          r = !1
+                            eImg.visible = !1
+                        })
+      }
+    })
+    AFRAME.registerComponent("my-xrextras-named-image-target", {
+      schema: {
+          name: {
+              type: "string"
+          },
+          desc: {
+            type: "string"
+          }
+      },
+      init: function() {
+          const e = this.el.object3D,
+              n = this.data.name,
+              el = this.el,
+              desc = this.data.desc;
+              e.visible = !1;
+          const text = document.getElementById('snailTargetText');
+          const t = ({
+              detail: t
+          }) => {
+            
+            if(desc == "snail" && t.name == "snail"){
+              text.style.display = "block"
+            } else {
+              text.style.display = "none"
+            }
+            n == t.name && (e.position.copy(t.position), e.quaternion.copy(t.rotation), e.scale.set(t.scale, t.scale, t.scale), e.visible = !0)
+
+          };
+          el.sceneEl.addEventListener("xrimagefound", t), el.sceneEl.addEventListener("xrimageupdated", t)
+      }
+    })
+    AFRAME.registerComponent("clear", {
+      init: function() {
+        const e = this.el.object3D,
+            clear_button = document.getElementById('clear');
+            const text = document.getElementById('snailTargetText');
+        const clear_all = () => { 
+          text.style.display = "none"
+          }
+        clear_button.onclick = clear_all
+      }
+    })
+
+
+  </script>
+  <script>
+
+  </script>
+</head>
+
+<body>
+  <a-scene  
+  clear
+  xantialias="true" 
+  xrweb="disableWorldTracking: true"
+  xrextras-almost-there 
+  xrextras-loading
+  xrextras-runtime-error>
+
+   <a-assets>
+    <img id="thumb" src="./trainedfiles/thumb.png">
+    <video
+      id="alpha-video"
+      playsinline
+      controls
+      crossorigin="anonymous"
+      loop="true"
+      src="./trainedfiles/awba.mp4">
+    </video>
+
+  </a-assets>
+
+    <a-camera position="0 4 10"  raycaster="objects: .cantap"
+    cursor="fuse: false; rayOrigin: mouse;">
+    </a-camera>
+
+    <a-light type="directional" intensity="0.5" position="1 1 1"></a-light>
+
+    <a-light type="ambient" intensity="1"></a-light>
+
+
+    <a-entity
+    my-xrextras-play-video="video: #alpha-video; thumb: #thumb; canstop: true; name: argiar-awba-shwe"
+    geometry="primitive: plane; height: 1; width: 1;">
+    </a-entity>
+
+    <a-entity
+    my-xrextras-named-image-target="name: snail; desc: snail"
+    >
+    </a-entity>
+
+    <a-entity
+    my-xrextras-play-video="video: #alpha-video; thumb: #thumb; canstop: true; name: argiar-awba"
+    geometry="primitive: plane; height: 1; width: 1;">
+    </a-entity>
+
+  </a-scene>
+
+  <div id="snailTargetText" class="typing">
+      ရွှေခရု [Pomacea canaliculata Lamarck] သည် စပါး ထုတ်လုပ်ရေးတွင် အရေးကြီး သော ဖျက်ပိုးဖြစ်သည်။ 
+      ၁၉၈၉ ခုနှစ်တွင် ဖိလစ်ပိုင်နိုင်ငံတွင် စပါးစိုက်ဧရိယာတွင် စပါးအထွက် ၁% မှ ၄၀% ထိ အထွက်ဆုံးရှုံးခဲ့ကြောင်း ကမ္ဘာ့စားနပ်ရိက္ခာအဖွဲ့အစည်းက ခန့်မှန်းခဲ့ပါသည်။
+  </div>
+
+  <div id="clear" class="clear">
+      Clear
+  </div>
+</body>
+
+</html>
